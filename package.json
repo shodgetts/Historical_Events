@@ -7,10 +7,18 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "react-dev": "webpack -d --watch"
   },
+  "eslintConfig": {
+    "extends": "airbnb",
+    "env": {
+      "jest": true,
+      "browser": true
+    }
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "babel": "^6.23.0",
+    "cors": "^2.8.5",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.18.2",
@@ -21,6 +29,7 @@
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
     "react-paginate": "^6.3.0",
+    "react-search-field": "^1.0.0",
     "webpack": "^4.41.0"
   },
   "devDependencies": {
