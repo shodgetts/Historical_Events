@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 import Event from './event.jsx';
-// import '../styles.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -21,11 +20,12 @@ class App extends React.Component {
     const { data, offset, perPage } = this.state;
     const elements = data
       .slice(offset, offset + perPage)
-      .map((post) => (<Event description={post.description} />));
+      .map((post, index) => (<Event description={post.description} key={index} />));
     this.setState({ elements });
   }
 
   handleSubmit(e) {
+    console.log('here');
     e.preventDefault();
     const { value } = this.state;
     const year = value.slice(0, 4);
@@ -37,6 +37,7 @@ class App extends React.Component {
     } else {
       date = year;
     }
+    console.log(date);
     fetch(`http://localhost:3000/events?date=${date}`)
       .then((results) => results.json())
       .then((data) => {
@@ -82,19 +83,28 @@ class App extends React.Component {
     const { value, elements } = this.state;
     return (
       <div className="container">
-        <div className="date-form">
-          <form onSubmit={(e) => this.handleSubmit(e)}>
-            <input type="date" value={value} onChange={(e) => this.handleChange(e)} />
-            <input type="submit" value="Submit" />
-          </form>
+        <div className="top-row">
+          <div className="header">
+            <h1>Search The Garbo Database For Historic Events</h1>
+          </div>
+          <div className="form-container">
+            <div className="form">
+              Search by Date
+              <form onSubmit={(e) => this.handleSubmit(e)}>
+                <input type="date" value={value} onChange={(e) => this.handleChange(e)} />
+                <input className="submit-button" type="submit" value="Submit" />
+              </form>
+            </div>
+            <div className="form">
+              Search by Year
+              <form onSubmit={(e) => this.handleSubmit(e)}>
+                <input type="text" value={value} onChange={(e) => this.handleChange(e)} />
+                <input className="submit-button" type="submit" value="Submit" />
+              </form>
+            </div>
+          </div>
         </div>
-        <div>
-          <form onSubmit={(e) => this.handleSubmit(e)}>
-            <input type="text" value={value} onChange={(e) => this.handleChange(e)} />
-            <input type="submit" value="Submit" />
-          </form>
-        </div>
-        <div className="App">
+        <div className="list-container">
           {paginationElement}
           {elements}
         </div>
