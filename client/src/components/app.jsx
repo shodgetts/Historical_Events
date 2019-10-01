@@ -85,7 +85,7 @@ class App extends React.Component {
       <div className="container">
         <div className="top-row">
           <div className="header">
-            <h1>Search The Garbo Database For Historic Events</h1>
+            <h1>Search The Database For Historic Events</h1>
           </div>
           <div className="form-container">
             <div className="form">
